@@ -12,7 +12,7 @@ public class Pawn : DamageableObject
 	protected int team;
 	
 	protected Controller controller;
-	
+		
 	protected void Awake(){
 		myTransform = transform;
 		
@@ -52,6 +52,7 @@ public class Pawn : DamageableObject
 			}
 		}
 	}
+	
 	
 	
 }

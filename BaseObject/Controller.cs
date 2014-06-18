@@ -19,6 +19,12 @@ public class Controller: MonoBehaviour{
 	
 	public Pawn pawn;
 	
+	public AIAgentComponent agent;
+	
+	void Awake(){
+		agent = GetComponent<AIAgentComponent>();
+	}
+	
 	void FixedUpdate(){
 		switch(state){
 			case PawnState.Stand:
@@ -46,6 +52,7 @@ public class Controller: MonoBehaviour{
 	}
 	public void MoveTo(Vector3  target){
 		position= target;
+		agent.SetTarget(target);
 		state=PawnState.Move;
 	}
 	public void FollowTarget(DamageableObject  target){
@@ -60,5 +67,13 @@ public class Controller: MonoBehaviour{
 	public void StandStill(){
 		state=PawnState.Stand;
 	}
-
+	
+	protected void _MoveTo(){
+		agent.WalkUpdate ();		
+	
+	}
+	protected void _Follow(){
+		agent.SetTarget(movementTarget.position,true);
+		agent.WalkUpdate ();		
+	}
 }
